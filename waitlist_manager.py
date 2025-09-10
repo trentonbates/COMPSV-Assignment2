@@ -48,14 +48,15 @@ class LinkedList:
         elif self.head.name == name:
             self.head = self.head.next
         else:
+            previous = None
             current = self.head
             while current and current.name != name:
+                previous = current
                 current = current.next
             if not current:
                 print('\nCustomer is not in the waitlist.')
             else:
-                current.name = current.next.name
-                current.next = current.next.next
+                previous.next = current.next
     
     def print_list(self):
         current = self.head
@@ -113,6 +114,21 @@ waitlist_generator()
 '''
 Design Memo: Write Your Design Memo Include a 200-300 word response in your code or in a .txt file:
 - How does your list work?
+
+Customers are able to be added to the front or end of the waitlist by using the relevant methods `add_front` and `add_end`.
+If a customer is needing to be removed from the waitlist, that can be done by using the `remove` method, which searches the
+list for the customer's name that is needing to be removed and deletes the node matching it. The list is also able to be
+printed to show which and how many customers are currently in the waitlist.
+
 - What role does the head play?
+
+The `head` plays a central role as the entry point to the entire linked list, always pointing to the first customer in the
+list. Without it, there is no way to access any nodes in the list. Any traversal of the list will always start at the beginning
+with the `head`. If the `head` has a value of `None`, then that tells us that there are no customers in the waitlist.
+
 - When might a real engineer need a custom list like this?
+
+A real engineer might need a custom list like this when the number of items is unknown and can change frequently, as well as
+needing memory efficiency to be a priority.
+
 '''
