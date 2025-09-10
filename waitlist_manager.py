@@ -26,27 +26,49 @@ class LinkedList:
 
     def __init__(self):
         self.head = None
-
+    
     def add_front(self, name):
-        customer = Node(name)
-        if not self.head:
-            self.head = customer
+        new_Node = Node(name)
+        new_Node.next = self.head
+        self.head = new_Node
 
     def add_end(self, name):
-        customer = Node(name)
-        current = self.head
-        while current.next:
-            current = current.next
-        current.next = customer
-    
+        new_Node = Node(name)
+        if not self.head:
+            self.head = new_Node
+        else:
+            current = self.head
+            while current.next:
+                current = current.next
+            current.next = new_Node
+
     def remove(self, name):
-        ...
+        if not self.head:
+            print('\nThe list is currently empty.')
+        elif self.head.name == name:
+            self.head = self.head.next
+        else:
+            current = self.head
+            while current and current.name != name:
+                current = current.next
+            if not current:
+                print('\nCustomer is not in the waitlist.')
+            else:
+                current.name = current.next.name
+                current.next = current.next.next
     
-    def print_list():
-        ...
+    def print_list(self):
+        current = self.head
+        if not current:
+            print('The list is currently empty.')
+        else:
+            while current:
+                print(current.name)
+                current = current.next
 
 def waitlist_generator():
     # Create a new linked list instance
+    waitlist = LinkedList()
     
     while True:
         print("\n--- Waitlist Manager ---")
@@ -59,38 +81,37 @@ def waitlist_generator():
         choice = input("Choose an option (1-5): ")
         
         if choice == "1":
-            name = input("Enter customer name to add to front: ")
+            name = input("\nEnter customer name to add to front: ")
             # Call the add_front method
-            
+            waitlist.add_front(name)
 
         elif choice == "2":
-            name = input("Enter customer name to add to end: ")
+            name = input("\nEnter customer name to add to end: ")
             # Call the add_end method
-            
+            waitlist.add_end(name)
 
         elif choice == "3":
-            name = input("Enter customer name to remove: ")
+            name = input("\nEnter customer name to remove: ")
             # Call the remove method
-            
+            waitlist.remove(name)
             
         elif choice == "4":
-            print("Current waitlist:")
+            print("\nCurrent waitlist:")
             # Print out the entire linked list using the print_list method.
-            
-            
-            
+            waitlist.print_list()
 
         elif choice == "5":
-            print("Exiting waitlist manager.")
+            print("\nExiting waitlist manager.")
             break
+
         else:
-            print("Invalid option. Please choose 1–5.")
+            print("\nInvalid option. Please choose 1-5.")
 
 # Call the waitlist_generator function to start the program
-
+waitlist_generator()
 
 '''
-Design Memo: Write Your Design Memo Include a 200–300 word response in your code or in a .txt file:
+Design Memo: Write Your Design Memo Include a 200-300 word response in your code or in a .txt file:
 - How does your list work?
 - What role does the head play?
 - When might a real engineer need a custom list like this?
