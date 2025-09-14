@@ -124,11 +124,15 @@ printed to show which and how many customers are currently in the waitlist.
 
 The `head` plays a central role as the entry point to the entire linked list, always pointing to the first customer in the
 list. Without it, there is no way to access any nodes in the list. Any traversal of the list will always start at the beginning
-with the `head`. If the `head` has a value of `None`, then that tells us that there are no customers in the waitlist.
+with the `head`. If the `head` has a value of `None`, then that tells us that there are no customers in the waitlist. Whenever
+we remove or add a customer from the front of the list, it is important that we also update the head so that it points to the
+correct node.
 
 - When might a real engineer need a custom list like this?
 
 A real engineer might need a custom list like this when the number of items is unknown and can change frequently, as well as
-needing memory efficiency to be a priority.
-
+needing memory efficiency to be a priority. A custom linked list is useful when the size of the data structure is unknown and 
+memory usage must be efficient. For example, waitlists in real-time systems (e.g., customer queues, task schedulers) often 
+benefit from such structures. Linked lists are particularly effective when frequent insertions and deletions are expected, and 
+array-based alternatives would involve costly shifts in memory.
 '''
